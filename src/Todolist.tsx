@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./Button";
+import { ButtonTrain } from "./ButtonTrain";
 
 export let tasks1 = [
     {id: 1, title: "CSS", isDone: true},
@@ -24,15 +25,16 @@ type TodoPropsType = {
     tasks: Array<TaskType>
 }
 
+
+
 export const TodoList = (props: TodoPropsType) => {
     const listItems: Array<JSX.Element> = []
     for(let i = 0; i < props.tasks.length; i++) {
         const listItem = <li>
-            <input type="checkbox" checked={props.tasks[i].isDone}/><span>{props.tasks[i].title}</span>
-            </li>
+        <input type="checkbox" checked={props.tasks[i].isDone}/><span>{props.tasks[i].title}</span>
+        </li>
         listItems.push(listItem)
     }
-
     return (
         <div>
             <div className="todoList">
@@ -48,6 +50,7 @@ export const TodoList = (props: TodoPropsType) => {
                     <Button title="All"/>
                     <Button title="Active"/>
                     <Button title="Completed"/>
+                    <ButtonTrain />
                 </div>
             </div>
         </div>

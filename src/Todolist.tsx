@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./Button";
-import { ButtonTrain } from "./ButtonTrain";
 
-export let tasks1 = [
+let tasks1 = [
     {id: 1, title: "CSS", isDone: true},
     {id: 2, title: "JS", isDone: true},
     {id: 3, title: "React", isDone: false},
 ]
 
-export let tasks2 = [
+let tasks2 = [
     {id: 1, title: "Terminator", isDone: true},
     {id: 2, title: "XXX", isDone: false},
     {id: 3, title: "Gentlemen of fortune", isDone: true},
@@ -23,18 +22,13 @@ type TaskType = {
 type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
+    removeTask: Function
 }
 
 
 
 export const TodoList = (props: TodoPropsType) => {
-    const listItems: Array<JSX.Element> = []
-    for(let i = 0; i < props.tasks.length; i++) {
-        const listItem = <li>
-        <input type="checkbox" checked={props.tasks[i].isDone}/><span>{props.tasks[i].title}</span>
-        </li>
-        listItems.push(listItem)
-    }
+    const [] = useState()
     return (
         <div>
             <div className="todoList">
@@ -44,13 +38,19 @@ export const TodoList = (props: TodoPropsType) => {
                     <Button title="+"/>
                 </div>
                 <ul>
-                    {listItems}
+                    {props.tasks.map((el, index) => {
+                        return (
+                            <li key={index}>
+                            <input type="checkbox" checked={el.isDone}/><span>{el.title}</span>
+                            <button onClick={() => props.removeTask(el.id)}>X</button>
+                            </li>
+                        )
+                    })}
                 </ul>
                 <div>
                     <Button title="All"/>
                     <Button title="Active"/>
                     <Button title="Completed"/>
-                    <ButtonTrain />
                 </div>
             </div>
         </div>

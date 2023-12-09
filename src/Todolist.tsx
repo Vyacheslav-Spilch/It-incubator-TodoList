@@ -28,7 +28,6 @@ type TodoPropsType = {
 
 
 export const TodoList = (props: TodoPropsType) => {
-    const [] = useState()
     return (
         <div>
             <div className="todoList">

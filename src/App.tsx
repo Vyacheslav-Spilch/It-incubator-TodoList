@@ -10,9 +10,17 @@ const App = () => {
     {id: 3, title: "React", isDone: false},
 ]
 const [tasks, setTasks] = useState(tasks1)
-
 const removeTask = (id: number) => {
   setTasks(tasks.filter(el => el.id !== id))
+}
+let [filter, setFilter] = useState("All")
+
+let filteredTasks = tasks
+if(filter === "Complited") {
+  filteredTasks = tasks.filter(el => el.isDone === true)
+}
+if(filter === "Active") {
+  filteredTasks = tasks.filter(el => el.isDone === false)
 }
 
 //   let tasks2 = [
@@ -23,7 +31,7 @@ const removeTask = (id: number) => {
 
   return (
     <div className="App">
-        <TodoList title={"What is learn"} tasks={tasks} removeTask={removeTask}/>
+        <TodoList title={"What is learn"} tasks={filteredTasks} removeTask={removeTask}/>
     </div>
   );
 }

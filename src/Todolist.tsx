@@ -14,7 +14,7 @@ import { Button } from "./Button";
 //     {id: 3, title: "Gentlemen of fortune", isDone: true},
 // ]
 
-type TaskType = {
+export type TaskType = {
     id: number,
     title: string,
     isDone: boolean
@@ -23,26 +23,26 @@ type TaskType = {
 type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: Function
+    deleteTasks: (id: number) => void
 }
 
 
 
-export const TodoList = (props: TodoPropsType) => {
+export const TodoList = ({title, tasks, deleteTasks}: TodoPropsType) => {
     return (
         <div>
             <div className="todoList">
-                <h3>{props.title}</h3>
+                <h3>{title}</h3>
                 <div>
                     <input />
                     {/* <Button title="+"/> */}
                 </div>
                 <ul>
-                    {props.tasks.map((el, index) => {
+                    {tasks.map(el => {
                         return (
-                            <li key={index}>
+                            <li key={el.id}>
                             <input type="checkbox" checked={el.isDone}/><span>{el.title}</span>
-                            <button onClick={() => props.removeTask(el.id)}>X</button>
+                            <button onClick={() => deleteTasks(el.id)}>X</button>
                             </li>
                         )
                     })}

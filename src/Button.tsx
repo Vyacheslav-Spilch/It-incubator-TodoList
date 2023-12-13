@@ -1,12 +1,12 @@
 import React from "react";
 
 
-type ButtonPropsType = {
+export type ButtonPropsType = {
     title: string
 }
 
 export const Button = (props: ButtonPropsType) => {
     return (
-        <button >{props.title}</button>
+        <button>{props.title}</button>
     )
 }

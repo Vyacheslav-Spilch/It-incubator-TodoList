@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { TaskType, TodoList } from './Todolist';
 
-type filterValuesType = 'all' | 'active' | 'completed'
+export type filterValuesType = 'all' | 'active' | 'completed'
 
 
 const App = () => {
@@ -36,11 +36,13 @@ const filteredTasks = filter === 'active'
   ? tasks.filter(el => el.isDone === true) 
   : tasks
 
-
+const changeTasks = (filter: filterValuesType) => {
+  setFilter(filter)
+}
 
   return (
     <div className="App">
-        <TodoList title={"What is learn"} tasks={filteredTasks} deleteTasks={deleteTasks}/>
+        <TodoList title={"What is learn"} tasks={filteredTasks} deleteTasks={deleteTasks} changeTasks={changeTasks}/>
     </div>
   );
 }

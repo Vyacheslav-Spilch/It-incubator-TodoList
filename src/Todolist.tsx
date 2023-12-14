@@ -1,5 +1,6 @@
 import { title } from "process";
 import React, { useState } from "react";
+import { filterValuesType } from "./App";
 import { Button } from "./Button";
 
 // let tasks1 = [
@@ -24,11 +25,12 @@ type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
     deleteTasks: (id: number) => void
+    changeTasks: (filter: filterValuesType) => void
 }
 
 
 
-export const TodoList = ({title, tasks, deleteTasks}: TodoPropsType) => {
+export const TodoList = ({title, tasks, deleteTasks, changeTasks}: TodoPropsType) => {
     return (
         <div>
             <div className="todoList">
@@ -42,15 +44,15 @@ export const TodoList = ({title, tasks, deleteTasks}: TodoPropsType) => {
                         return (
                             <li key={el.id}>
                             <input type="checkbox" checked={el.isDone}/><span>{el.title}</span>
-                            <button onClick={() => deleteTasks(el.id)}>X</button>
+                            <Button title="X" onClickHandler={() => deleteTasks(el.id)}/>
                             </li>
                         )
                     })}
                 </ul>
                 <div>
-                    <Button title="All" />
-                    <Button title="Active" />
-                    <Button title="Completed" />
+                    <Button title="All" onClickHandler={() => changeTasks("all")}/>
+                    <Button title="Active" onClickHandler={() => changeTasks("active")}/>
+                    <Button title="Completed" onClickHandler={() => changeTasks("completed")}/>
                 </div>
             </div>
         </div>

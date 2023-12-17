@@ -44,7 +44,7 @@ export const TodoList = ({title, tasks, deleteTasks, changeTasks}: TodoPropsType
                         return (
                             <li key={el.id}>
                             <input type="checkbox" checked={el.isDone}/><span>{el.title}</span>
-                            <Button title="X" onClickHandler={() => deleteTasks(el.id)}/>
+                            <Button title="x" onClickHandler={() => deleteTasks(el.id)}/>
                             </li>
                         )
                     })}

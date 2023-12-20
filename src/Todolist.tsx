@@ -1,19 +1,8 @@
 import { title } from "process";
-import React, { useRef, useState } from "react";
+import React, { useState, KeyboardEvent } from "react";
 import { filterValuesType } from "./App";
 import { Button } from "./Button";
 
-// let tasks1 = [
-//     {id: 1, title: "CSS", isDone: true},
-//     {id: 2, title: "JS", isDone: true},
-//     {id: 3, title: "React", isDone: false},
-// ]
-
-// let tasks2 = [
-//     {id: 1, title: "Terminator", isDone: true},
-//     {id: 2, title: "XXX", isDone: false},
-//     {id: 3, title: "Gentlemen of fortune", isDone: true},
-// ]
 
 export type TaskType = {
     id: string,
@@ -36,7 +25,7 @@ export const TodoList = ({
     tasks, 
     deleteTasks, 
     changeTasks, 
-    addTask
+    addTask,
 }: TodoPropsType) => {
 
     const tasksList: JSX.Element = tasks.length !== 0 
@@ -54,6 +43,13 @@ export const TodoList = ({
 
     const [taskTitle, setTaskTitle] = useState('')
 
+    const addTaskHandler = () => {
+        addTask(taskTitle)
+        setTaskTitle("")
+    }
+
+    
+
     return (
         <div>
             <div className="todoList">
@@ -62,8 +58,14 @@ export const TodoList = ({
                     <input
                         value={taskTitle} onChange={(e) => {
                         setTaskTitle(e.currentTarget.value)
-                    }}/>
-                    <Button title="+" onClickHandler={() => addTask(taskTitle)}/>
+                        }}
+                        onKeyDown={(e) => {
+                            if(e.key === "Enter" && taskTitle.trim()) {
+                                addTaskHandler()
+                            }
+                        }}
+                    />
+                    <Button title="+" onClickHandler={addTaskHandler} isDisabled={!taskTitle.trim()}/>
                 </div>
                     {tasksList}
                 <div>

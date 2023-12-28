@@ -13,6 +13,7 @@ export type TaskType = {
 type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
+    filter: filterValuesType
 
     deleteTasks: (id: string) => void
     changeTasks: (filter: filterValuesType) => void
@@ -22,7 +23,8 @@ type TodoPropsType = {
 
 export const TodoList = ({
     title, 
-    tasks, 
+    tasks,
+    filter,
     deleteTasks, 
     changeTasks, 
     addTask,
@@ -42,20 +44,29 @@ export const TodoList = ({
     : <span>Todo list empty</span>
 
     const [taskTitle, setTaskTitle] = useState('')
-
+    const [error, setError] = useState<string | null>(null)
 
     const addTaskHandler = () => {
-        addTask(taskTitle)
-        setTaskTitle("")
+        if(taskTitle.trim()) {
+            addTask(taskTitle)
+            setTaskTitle("")
+        }
+        else {
+            setError('Error - empty string')
+        }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setError(null)
         setTaskTitle(e.currentTarget.value)
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter" && taskTitle.trim()) {
             addTaskHandler()
+        }
+        else {
+            setError('Error - empty string')
         }
     }
 
@@ -71,14 +82,16 @@ export const TodoList = ({
                     <input
                         value={taskTitle} onChange={onChangeHandler}
                         onKeyDown={onKeyDownHandler}
+                        className={error ? "error" : ""}
                     />
-                    <Button title="+" onClickHandler={addTaskHandler} isDisabled={!taskTitle.trim()}/>
+                    <Button title="+" onClickHandler={addTaskHandler} isDisabled={!taskTitle}/>
+                    {error && <div className="error-message">{error}</div>}
                 </div>
                     {tasksList}
                 <div>
-                    <Button title="All" onClickHandler={onClickAllHandler} />
-                    <Button title="Active" onClickHandler={onClickActiveHandler} />
-                    <Button title="Completed" onClickHandler={onClickCompletedHandler} />
+                    <Button className={filter === "all" ? "active-filter" : ""} title="All" onClickHandler={onClickAllHandler} />
+                    <Button className={filter === "active" ? "active-filter" : ""} title="Active" onClickHandler={onClickActiveHandler} />
+                    <Button className={filter === "completed" ? "active-filter" : ""} title="Completed" onClickHandler={onClickCompletedHandler} />
                 </div>
             </div>
         </div>

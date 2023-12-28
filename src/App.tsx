@@ -37,8 +37,6 @@ const filteredTasks = filter === 'active'
   ? tasks.filter(el => el.isDone === true) 
   : tasks
 
-
-
 const changeTasks = (filter: filterValuesType) => {
   setFilter(filter)
 }
@@ -49,8 +47,15 @@ const addTask = (newTitle: string) => {
     title: newTitle,
     isDone: false,
   }
-  
   setTasks([newTask, ...tasks])
+}
+
+const changeStatus = (taskId: string, isDone: boolean) => {
+  let task = tasks.find(t => t.id === taskId)
+  if(task) {
+    task.isDone = isDone
+    setTasks([...tasks])
+  }
 }
 
   return (
@@ -59,7 +64,8 @@ const addTask = (newTitle: string) => {
         tasks={filteredTasks} 
         deleteTasks={deleteTasks} 
         changeTasks={changeTasks} 
-        addTask={addTask}/>
+        addTask={addTask}
+        filter={filter}/>
     </div>
   );
 }

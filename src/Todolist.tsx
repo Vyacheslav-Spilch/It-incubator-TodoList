@@ -18,6 +18,7 @@ type TodoPropsType = {
     deleteTasks: (id: string) => void
     changeTasks: (filter: filterValuesType) => void
     addTask: (newTitle: string) => void
+    changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
 }
 
 
@@ -28,6 +29,7 @@ export const TodoList = ({
     deleteTasks, 
     changeTasks, 
     addTask,
+    changeTaskStatus,
 }: TodoPropsType) => {
 
     const tasksList: JSX.Element = tasks.length !== 0 
@@ -35,13 +37,20 @@ export const TodoList = ({
             {tasks.map(el => {
                 return (
                 <li key={el.id}>
-                    <input type="checkbox" checked={el.isDone}/><span>{el.title}</span>
+                    <input 
+                        type="checkbox" 
+                        checked={el.isDone}
+                        onChange={(e) => changeTaskStatus(el.id, e.currentTarget.checked)}
+                    />
+                    <span>{el.title}</span>
                     <Button title="x" onClickHandler={() => deleteTasks(el.id)} />
                 </li>
             )
         })}
         </ul> 
-    : <span>Todo list empty</span>
+    : <span>{filter === "active" 
+        ? "The list of active tasks is empty" 
+        : filter === "completed" ? "The list of completed tasks is empty" : "Task list is empty"}</span>
 
     const [taskTitle, setTaskTitle] = useState('')
     const [error, setError] = useState<string | null>(null)

@@ -7,16 +7,6 @@ export type filterValuesType = 'all' | 'active' | 'completed'
 
 
 const App = () => {
-//   let tasks1 = [
-//     {id: 1, title: "CSS", isDone: true},
-//     {id: 2, title: "JS", isDone: true},
-//     {id: 3, title: "React", isDone: false},
-// ]
-//   let tasks2 = [
-//     {id: 1, title: "Terminator", isDone: true},
-//     {id: 2, title: "XXX", isDone: false},
-//     {id: 3, title: "Gentlemen of fortune", isDone: true},
-// ] 
 
 let [tasks, setTasks] = useState<Array<TaskType>>([
   {id: v1(), title: "CSS", isDone: true},
@@ -50,12 +40,9 @@ const addTask = (newTitle: string) => {
   setTasks([newTask, ...tasks])
 }
 
-const changeStatus = (taskId: string, isDone: boolean) => {
-  let task = tasks.find(t => t.id === taskId)
-  if(task) {
-    task.isDone = isDone
-    setTasks([...tasks])
-  }
+const changeTaskStatus = (taskId: string, newIsDoneValue: boolean) => {
+  let nexTask: Array<TaskType> = tasks.map(el => el.id === taskId ? {...el, isDone: newIsDoneValue} : el)
+  setTasks(nexTask)
 }
 
   return (
@@ -65,7 +52,8 @@ const changeStatus = (taskId: string, isDone: boolean) => {
         deleteTasks={deleteTasks} 
         changeTasks={changeTasks} 
         addTask={addTask}
-        filter={filter}/>
+        filter={filter}
+        changeTaskStatus={changeTaskStatus}/>
     </div>
   );
 }

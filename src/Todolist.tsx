@@ -14,9 +14,10 @@ type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
     filter: filterValuesType
+    todoListId: string
 
-    deleteTasks: (id: string) => void
-    changeTasks: (filter: filterValuesType) => void
+    deleteTasks: (todolistID: string, id: string) => void
+    changeTasks: (taskTodoListID: string, filter: filterValuesType) => void
     addTask: (newTitle: string) => void
     changeTaskStatus: (taskId: string, newIsDoneValue: boolean) => void
 }
@@ -26,11 +27,14 @@ export const TodoList = ({
     title, 
     tasks,
     filter,
+    todoListId,
     deleteTasks, 
     changeTasks, 
     addTask,
     changeTaskStatus,
 }: TodoPropsType) => {
+
+    
 
     const tasksList: JSX.Element = tasks.length !== 0 
     ?   <ul>
@@ -42,8 +46,8 @@ export const TodoList = ({
                         checked={el.isDone}
                         onChange={(e) => changeTaskStatus(el.id, e.currentTarget.checked)}
                     />
-                    <span>{el.title}</span>
-                    <Button title="x" onClickHandler={() => deleteTasks(el.id)} />
+                    <span className={el.isDone ? "task-done" : "task-active"}>{el.title}</span>
+                    <Button title="x" onClickHandler={() => deleteTasks(todoListId, el.id)} />
                 </li>
             )
         })}
@@ -79,9 +83,9 @@ export const TodoList = ({
         }
     }
 
-    const onClickAllHandler = () => changeTasks('all')
-    const onClickActiveHandler = () => changeTasks('active')
-    const onClickCompletedHandler = () => changeTasks('completed')
+    const onClickAllHandler = () => changeTasks(todoListId, 'all')
+    const onClickActiveHandler = () => changeTasks(todoListId, 'active')
+    const onClickCompletedHandler = () => changeTasks(todoListId, 'completed')
 
     return (
         <div>
@@ -89,7 +93,8 @@ export const TodoList = ({
                 <h3>{title}</h3>
                 <div>
                     <input
-                        value={taskTitle} onChange={onChangeHandler}
+                        value={taskTitle} 
+                        onChange={onChangeHandler}
                         onKeyDown={onKeyDownHandler}
                         className={error ? "error" : ""}
                     />
@@ -98,9 +103,21 @@ export const TodoList = ({
                 </div>
                     {tasksList}
                 <div>
-                    <Button className={filter === "all" ? "active-filter" : ""} title="All" onClickHandler={onClickAllHandler} />
-                    <Button className={filter === "active" ? "active-filter" : ""} title="Active" onClickHandler={onClickActiveHandler} />
-                    <Button className={filter === "completed" ? "active-filter" : ""} title="Completed" onClickHandler={onClickCompletedHandler} />
+                    <Button 
+                        className={filter === "all" ? "active-filter" : ""} 
+                        title="All" 
+                        onClickHandler={onClickAllHandler} 
+                    />
+                    <Button 
+                        className={filter === "active" ? "active-filter" : ""} 
+                        title="Active" 
+                        onClickHandler={onClickActiveHandler} 
+                    />
+                    <Button 
+                        className={filter === "completed" ? "active-filter" : ""} 
+                        title="Completed" 
+                        onClickHandler={onClickCompletedHandler} 
+                    />
                 </div>
             </div>
         </div>

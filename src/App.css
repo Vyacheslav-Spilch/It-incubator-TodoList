@@ -5,15 +5,38 @@
   display: flex;
   padding: 30px;
 }
+
 .todoList > div {
   margin-right: 50px;
 }
+
 .todoList {
   border: 1px solid black;
   border-radius: 5px;
-  background-color: aqua;
+  /* background-color: rgb(0, 255, 128); */
+  background-color: rgb(57, 36, 160);
   padding: 20px;
   font-weight: 600;
+  position: relative;
+}
+.title-todolist {
+  color: #fff;
+}
+.title {
+  font-size: 35px;
+  letter-spacing: 1.2;
+  text-align: center;
+  color: #fff;
+}
+.container-title {
+  margin: 0 auto;
+  background-color:rgb(57, 36, 160);
+  padding: 15px 35px;
+  border-radius: 35px;
+}
+.todoList ul {
+  list-style-type: none;
+  line-height: 30px;
 }
 
 .error {
@@ -22,15 +45,74 @@
 .error-message {
   color: red
 }
+.input {
+  border-radius: 10px;
+  padding: 5px 10px;
+  outline: none;
+}
 
 .active-filter {
-  background-color: rgb(160, 156, 36);
+  background-color: rgb(57, 36, 160);
   color: #fff;
 }
 
 .task-done {
-  color: green;
+  color: rgb(31, 177, 31);
 }
 .task-active {
   color: #fff;
+}
+
+.delete-todolist {
+  right: 10px;
+  top: 10px;
+  background-color: rgb(160, 156, 36);
+  position: absolute;
+  cursor: pointer;
+}
+.delete-todolist:hover {
+  background-color: #fff;
+  color: rgb(160, 156, 36);
+}
+
+.btn-add-task {
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background-color: rgb(57, 36, 160);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.btn-add-task:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in;
+}
+.isActive-filter, .active-filter {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.isActive-filter {
+  border: 1px solid rgb(57, 36, 160);
+  color: rgb(57, 36, 160);
+}
+
+.filter_span{
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 10px 0 20px;
+  color:  transparent;
+  letter-spacing: 1.2px;
+  -webkit-text-stroke: #fff;
+  -webkit-text-stroke-width: 1px;
+}
+.input_and_btn {
+  display: flex;
+  align-items: center;
+}
+.input_and_btn input {
+  border: none;
+  margin-right: 5px;
 }

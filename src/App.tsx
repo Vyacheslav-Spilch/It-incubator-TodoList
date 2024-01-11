@@ -1,6 +1,7 @@
 import { type } from 'os';
 import React, { useState } from 'react';
 import { v1 } from 'uuid';
+import { AddItemForm } from './AddItemForm';
 import './App.css';
 import { TaskType, TodoList } from './Todolist';
 
@@ -36,6 +37,8 @@ const deleteTasks = (todolistID: string, taskId: string) => {
   let filteredTasks = currentTasks.filter(el => el.id !== taskId)
   tasks[todolistID] = filteredTasks
   setTasks({...tasks})
+
+  
   
   // setTasks({...tasks, [todolistID]: tasks[todolistID].filter(el => el.id !== taskId)})
 }
@@ -102,11 +105,14 @@ const deleteTodolist = (todoListID: string) => {
   : 
   <div className='container-title'><span className='title'>Список задач пуст</span></div>
 
-
+const addTodolist = () => {
+  const newTodolistId = v1()
+}
 
 
   return (
     <div className="App">
+      <AddItemForm callBack={addTodolist}/>
       {todoListContent}
     </div>
   );

@@ -97,11 +97,15 @@ export const TodoList = ({
         deleteTodolist(todoListId)
     }
 
+    const addTaskHandler = () => {
+        
+    }
+
     return (
         <div>
             <div className="todoList">
                     <h3 className="title-todolist">{title}</h3>
-                    <AddItemForm addTask={addTask} todoListId={todoListId}/>
+                    <AddItemForm callBack={addTask}/>
                         <Button 
                         title="x" 
                         className="delete-todolist" 

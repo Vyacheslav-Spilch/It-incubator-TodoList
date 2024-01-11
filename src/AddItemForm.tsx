@@ -3,8 +3,7 @@ import { Button } from "./Button";
 import './App.css';
 
 type AddItemFormProps = {
-    addTask: (todoListId: string, taskTitle: string) => void
-    todoListId: string
+    callBack: (title: string) => void
 }
 
 export const AddItemForm = (props: AddItemFormProps) => {
@@ -13,7 +12,7 @@ export const AddItemForm = (props: AddItemFormProps) => {
 
     const addTaskHandler = () => {
         if(taskTitle.trim()) {
-            props.addTask(props.todoListId, taskTitle)
+            props.callBack(taskTitle)
             setTaskTitle("")
         }
         else {

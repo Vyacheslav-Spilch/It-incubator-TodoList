@@ -7,7 +7,9 @@ import { TaskType, TodoList } from './Todolist';
 
 export type filterValuesType = 'all' | 'active' | 'completed'
 type todoListsType = {id: string, title: string, filter: filterValuesType}
-
+type TaskStateType = {
+  [key: string]: TaskType[]
+}
 
 const App = () => {
 
@@ -19,7 +21,7 @@ const App = () => {
       {id: todolistID2, title: 'Skills #2', filter: 'all'},
   ])
 
-  let [tasks, setTasks] = useState({
+  let [tasks, setTasks] = useState<TaskStateType>({
       [todolistID1]: [
           {id: v1(), title: 'HTML&CSS', isDone: true},
           {id: v1(), title: 'JS', isDone: true},
@@ -75,7 +77,13 @@ const deleteTodolist = (todoListID: string) => {
   todolists.pop()
 }
 
+const updateTask = (todoListId: string,taskId: string, title: string) => {
+  setTasks({...tasks, [todoListId]: tasks[todoListId].map(el => el.id === taskId ? {...el, title} : el)})
+}
 
+const updateTodolist = (todoListId: string, title: string) => {
+  setTodolists(todolists.map(el => el.id === todoListId ? {...el, title} : el))
+}
   
   
   let todoListContent = todolists.length !== 0 
@@ -99,14 +107,19 @@ const deleteTodolist = (todoListID: string) => {
       filter={el.filter}
       todoListId={el.id}
       changeTaskStatus={changeTaskStatus}
+      updateTask={updateTask}
+      updateTodolist={updateTodolist}
     />
     )
   }) 
   : 
   <div className='container-title'><span className='title'>Список задач пуст</span></div>
 
-const addTodolist = () => {
+const addTodolist = (title: string) => {
   const newTodolistId = v1()
+  const newTotoList: todoListsType = {id: newTodolistId, title, filter: 'all'}
+  setTodolists([newTotoList, ...todolists])
+  setTasks({...tasks, [newTodolistId]: []})
 }
 
 

@@ -1,6 +1,7 @@
 import React, {KeyboardEvent, ChangeEvent, useState } from "react";
-import { Button } from "./Button";
 import './App.css';
+import Button from '@mui/material/Button';
+import { stylesButton } from "./components/Styled";
 
 type AddItemFormProps = {
     callBack: (title: string) => void
@@ -35,6 +36,7 @@ export const AddItemForm = (props: AddItemFormProps) => {
         }
     }
 
+
     return (
         <div className="input_and_btn">
                     <input
@@ -42,8 +44,17 @@ export const AddItemForm = (props: AddItemFormProps) => {
                         onChange={onChangeHandler}
                         onKeyDown={onKeyDownHandler}
                         className={error ? "error input" : "input"}
+                        onBlur={() => setError(null)}
+                        autoFocus
                     />
-                    <Button title="+" onClickHandler={addTaskHandler} isDisabled={!taskTitle} className={"btn-add-task"}/>
+                    <Button 
+                    onClick={addTaskHandler} 
+                    variant="contained" 
+                    color='info'
+                    style={stylesButton}
+                    >
+                        +
+                    </Button>
                     {error && <div className="error-message">{error}</div>}
                 </div>
     )

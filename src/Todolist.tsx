@@ -1,8 +1,12 @@
-import { title } from "process";
-import React, { useState, KeyboardEvent, ChangeEvent } from "react";
+// import { title } from "process";
+// import React, { useState, KeyboardEvent, ChangeEvent } from "react";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { AddItemForm } from "./AddItemForm";
 import { filterValuesType } from "./App";
-import { Button } from "./Button";
+// import { Button } from "./Button";
+import { EditTableSpan } from "./EditTableSpan";
+import Button from '@mui/material/Button';
 
 
 export type TaskType = {
@@ -22,7 +26,8 @@ type TodoPropsType = {
     changeTasks: (taskTodoListID: string, filter: filterValuesType) => void
     addTask: (todoListID: string, newTitle: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, newIsDoneValue: boolean) => void
-
+    updateTask: (todoListId: string,taskId: string, title: string) => void
+    updateTodolist: (todoListId: string, title: string) => void
 }
 
 
@@ -37,13 +42,19 @@ export const TodoList = ({
     changeTasks, 
     addTask,
     changeTaskStatus,
+    updateTask,
+    updateTodolist,
 }: TodoPropsType) => {
 
-    
 
     const tasksList: JSX.Element = tasks.length !== 0 
     ?   <ul>
-            {tasks.map(el => {
+            {tasks.map((el: TaskType) => {
+
+            const updateTaskHandler = (title: string) => {
+                updateTask(todoListId, el.id, title)
+            }
+
                 return (
                 <li key={el.id}>
                     <input
@@ -51,43 +62,18 @@ export const TodoList = ({
                         checked={el.isDone}
                         onChange={(e) => changeTaskStatus(todoListId, el.id, e.currentTarget.checked)}
                     />
-                    <span className={el.isDone ? "task-done" : "task-active"}>{el.title}</span>
-                    <Button title="x" onClickHandler={() => deleteTasks(todoListId, el.id)} />
+                    <EditTableSpan oldTitle={el.title} isDone={el.isDone} callBack={updateTaskHandler}/>
+                    <IconButton aria-label="delete" onClick={() => deleteTasks(todoListId, el.id)}>
+                        <DeleteIcon className='delete-todolist'/>
+                    </IconButton>
                 </li>
             )
         })}
         </ul> 
-    : <span className="filter_span">{filter === "active" 
-        ? "The list of active tasks is empty" 
-        : filter === "completed" ? "The list of completed tasks is empty" : "Task list is empty"}
-    </span>
+    : filter === "all" 
+    ? <span className="filter_span">Task list is empty</span> 
+    : <span className="filter_span">The list of {filter} is empty</span>
 
-    // const [taskTitle, setTaskTitle] = useState('')
-    // const [error, setError] = useState<string | null>(null)
-
-    // const addTaskHandler = () => {
-    //     if(taskTitle.trim()) {
-    //         addTask(todoListId, taskTitle)
-    //         setTaskTitle("")
-    //     }
-    //     else {
-    //         setError('Error - empty string')
-    //     }
-    // }
-
-    // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setError(null)
-    //     setTaskTitle(e.currentTarget.value)
-    // }
-
-    // const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    //     if(e.key === "Enter" && taskTitle.trim()) {
-    //         addTaskHandler()
-    //     }
-    //     else {
-    //         setError('Error - empty string')
-    //     }
-    // }
 
     const onClickAllHandler = () => changeTasks(todoListId, 'all')
     const onClickActiveHandler = () => changeTasks(todoListId, 'active')
@@ -97,37 +83,47 @@ export const TodoList = ({
         deleteTodolist(todoListId)
     }
 
-    const addTaskHandler = () => {
-        
+    const addTaskHandler = (title: string) => {
+        addTask(todoListId, title)
+    }
+
+    const updateTodolistHandler = (title: string) => {
+        updateTodolist(todoListId, title)
     }
 
     return (
         <div>
             <div className="todoList">
-                    <h3 className="title-todolist">{title}</h3>
-                    <AddItemForm callBack={addTask}/>
-                        <Button 
-                        title="x" 
-                        className="delete-todolist" 
-                        onClickHandler={deleteTodolistsHandler}
-                        />
+                    <h3>
+                        <EditTableSpan oldTitle={title} callBack={updateTodolistHandler}/> 
+                        <IconButton aria-label="delete" onClick={deleteTodolistsHandler}>
+                            <DeleteIcon className='delete-todolist'/>
+                        </IconButton>
+                    </h3>
+                        <AddItemForm callBack={addTaskHandler}/>
                     {tasksList}
                 <div>
-                    <Button 
-                        className={filter === "all" ? "active-filter" : "isActive-filter"} 
-                        title="All" 
-                        onClickHandler={onClickAllHandler} 
-                    />
-                    <Button 
-                        className={filter === "active" ? "active-filter" : "isActive-filter"} 
-                        title="Active" 
-                        onClickHandler={onClickActiveHandler} 
-                    />
-                    <Button 
-                        className={filter === "completed" ? "active-filter" : "isActive-filter"} 
-                        title="Completed" 
-                        onClickHandler={onClickCompletedHandler} 
-                    />
+                <Button 
+                    variant={filter === 'all' ? 'contained' : 'outlined'} 
+                    color='info'
+                    onClick={onClickAllHandler}
+                    >
+                    All
+                </Button>
+                <Button 
+                    variant={filter === 'active' ? 'contained' : 'outlined'} 
+                    color='info' 
+                    onClick={onClickActiveHandler}
+                    >
+                    Active
+                </Button>
+                <Button 
+                    variant={filter === 'completed' ? 'contained' : 'outlined'} 
+                    color='info'
+                    onClick={onClickCompletedHandler}
+                    >
+                    Completed
+                </Button>
                 </div>
             </div>
         </div>

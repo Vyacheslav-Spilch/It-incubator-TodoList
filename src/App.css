@@ -3,6 +3,10 @@
 }
 .App {
   display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
   padding: 30px;
 }
 
@@ -11,10 +15,10 @@
 }
 
 .todoList {
-  border: 1px solid black;
+  border: 1px solid rgb(57, 36, 160);
   border-radius: 5px;
   /* background-color: rgb(0, 255, 128); */
-  background-color: rgb(57, 36, 160);
+  background-color: #fff;
   padding: 20px;
   font-weight: 600;
   position: relative;
@@ -26,7 +30,7 @@
   font-size: 35px;
   letter-spacing: 1.2;
   text-align: center;
-  color: #fff;
+  color: rgb(57, 36, 160);
 }
 .container-title {
   margin: 0 auto;
@@ -49,30 +53,29 @@
   border-radius: 10px;
   padding: 5px 10px;
   outline: none;
+  color: #000;
 }
 
 .active-filter {
   background-color: rgb(57, 36, 160);
-  color: #fff;
+  color: rgb(57, 36, 160);
 }
 
 .task-done {
   color: rgb(31, 177, 31);
 }
 .task-active {
-  color: #fff;
+  color: #000;
 }
 
 .delete-todolist {
-  right: 10px;
-  top: 10px;
-  background-color: rgb(160, 156, 36);
-  position: absolute;
+  left: 90%;
+  top: -20px;
+  color: grey;
   cursor: pointer;
 }
 .delete-todolist:hover {
-  background-color: #fff;
-  color: rgb(160, 156, 36);
+
 }
 
 .btn-add-task {
@@ -105,14 +108,12 @@
   margin: 10px 0 20px;
   color:  transparent;
   letter-spacing: 1.2px;
-  -webkit-text-stroke: #fff;
-  -webkit-text-stroke-width: 1px;
+  color: #000;
 }
 .input_and_btn {
   display: flex;
   align-items: center;
 }
 .input_and_btn input {
-  border: none;
-  margin-right: 5px;
+  border: 1px solid rgb(57, 36, 160);
 }

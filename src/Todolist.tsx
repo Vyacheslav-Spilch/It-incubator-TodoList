@@ -1,12 +1,13 @@
-// import { title } from "process";
-// import React, { useState, KeyboardEvent, ChangeEvent } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AddItemForm } from "./AddItemForm";
 import { filterValuesType } from "./App";
-// import { Button } from "./Button";
 import { EditTableSpan } from "./EditTableSpan";
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+
 
 
 export type TaskType = {
@@ -57,11 +58,19 @@ export const TodoList = ({
 
                 return (
                 <li key={el.id}>
-                    <input
+                    <Checkbox 
+                    size='small'
+                    color='info'
+                    {...label} 
+                    defaultChecked 
+                    checked={el.isDone}
+                    onChange={(e) => changeTaskStatus(todoListId, el.id, e.currentTarget.checked)}
+                    />
+                    {/* <input
                         type="checkbox" 
                         checked={el.isDone}
                         onChange={(e) => changeTaskStatus(todoListId, el.id, e.currentTarget.checked)}
-                    />
+                    /> */}
                     <EditTableSpan oldTitle={el.title} isDone={el.isDone} callBack={updateTaskHandler}/>
                     <IconButton aria-label="delete" onClick={() => deleteTasks(todoListId, el.id)}>
                         <DeleteIcon className='delete-todolist'/>

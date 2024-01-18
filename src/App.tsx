@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { v1 } from 'uuid';
 import { AddItemForm } from './AddItemForm';
 import './App.css';
+import { ButtonAppBar } from './components/ButtonAppBar';
 import { TaskType, TodoList } from './Todolist';
 
 export type filterValuesType = 'all' | 'active' | 'completed'
@@ -125,8 +126,11 @@ const addTodolist = (title: string) => {
 
   return (
     <div className="App">
-      <AddItemForm callBack={addTodolist}/>
-      {todoListContent}
+      <ButtonAppBar />
+      <div className='container-todolist'>
+        <AddItemForm callBack={addTodolist}/>
+        {todoListContent}
+      </div>
     </div>
   );
 

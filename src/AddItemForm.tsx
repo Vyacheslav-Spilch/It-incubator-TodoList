@@ -2,6 +2,7 @@ import React, {KeyboardEvent, ChangeEvent, useState } from "react";
 import './App.css';
 import Button from '@mui/material/Button';
 import { stylesButton } from "./components/Styled";
+import TextField from '@mui/material/TextField';
 
 type AddItemFormProps = {
     callBack: (title: string) => void
@@ -39,13 +40,16 @@ export const AddItemForm = (props: AddItemFormProps) => {
 
     return (
         <div className="input_and_btn">
-                    <input
-                        value={taskTitle} 
-                        onChange={onChangeHandler}
-                        onKeyDown={onKeyDownHandler}
-                        className={error ? "error input" : "input"}
-                        onBlur={() => setError(null)}
-                        autoFocus
+                    <TextField 
+                    size="small"
+                    id="outlined-basic" 
+                    value={taskTitle}
+                    label={error ? error : taskTitle ? `Add task ${taskTitle}` : 'Add task...'}
+                    variant="outlined"
+                    onChange={onChangeHandler}
+                    onKeyDown={onKeyDownHandler}
+                    error={!!error}
+                    onBlur={() => setError(null)}
                     />
                     <Button 
                     onClick={addTaskHandler} 
@@ -55,7 +59,6 @@ export const AddItemForm = (props: AddItemFormProps) => {
                     >
                         +
                     </Button>
-                    {error && <div className="error-message">{error}</div>}
                 </div>
     )
 }

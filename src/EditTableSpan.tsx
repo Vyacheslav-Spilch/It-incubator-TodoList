@@ -1,5 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import './App.css';
+import TextField from '@mui/material/TextField';
+
 
 type EditTableSpanProps = {
     oldTitle: string
@@ -36,14 +38,28 @@ export const EditTableSpan = (props: EditTableSpanProps) => {
 
     return (
         edit 
-        ? <input 
+        ? <TextField 
+        size="small"
+        id="standard-basic" 
+        label="Standard" 
+        variant="standard" 
         value={newTitle} 
         type="text" 
         className="input"
         onBlur={editHandler}
         onKeyDown={onKeyDownHandler}
         autoFocus
-        onChange={changeEditHAndler}/> 
+        onChange={changeEditHAndler}
+        />
         : <span onDoubleClick={editHandler} className={props.isDone ? "task-done" : "task-active"}>{props.oldTitle}</span>
     )
 }
+
+{/* <input 
+        value={newTitle} 
+        type="text" 
+        className="input"
+        onBlur={editHandler}
+        onKeyDown={onKeyDownHandler}
+        autoFocus
+        onChange={changeEditHAndler}/>  */}

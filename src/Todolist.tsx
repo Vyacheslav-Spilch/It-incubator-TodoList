@@ -5,9 +5,9 @@ import { filterValuesType } from "./App";
 import { EditTableSpan } from "./EditTableSpan";
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
+import React, { ChangeEvent } from 'react';
+import { CheckboxUni } from './components/CheckboxUni';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-
 
 
 export type TaskType = {
@@ -32,7 +32,8 @@ type TodoPropsType = {
 }
 
 
-export const TodoList = ({
+
+    export const TodoList: React.FC<TodoPropsType> = ({
     title, 
     tasks,
     filter,
@@ -45,7 +46,7 @@ export const TodoList = ({
     changeTaskStatus,
     updateTask,
     updateTodolist,
-}: TodoPropsType) => {
+}) => {
 
 
     const tasksList: JSX.Element = tasks.length !== 0 
@@ -55,22 +56,16 @@ export const TodoList = ({
             const updateTaskHandler = (title: string) => {
                 updateTask(todoListId, el.id, title)
             }
+            const onChangeTaskHandler = (checkedValue: boolean) => {
+                changeTaskStatus(todoListId, el.id, checkedValue)
+            }
 
                 return (
                 <li key={el.id}>
-                    <Checkbox 
-                    size='small'
-                    color='info'
-                    {...label} 
-                    defaultChecked 
-                    checked={el.isDone}
-                    onChange={(e) => changeTaskStatus(todoListId, el.id, e.currentTarget.checked)}
+                    <CheckboxUni 
+                        isDone={el.isDone} 
+                        callBack={onChangeTaskHandler}
                     />
-                    {/* <input
-                        type="checkbox" 
-                        checked={el.isDone}
-                        onChange={(e) => changeTaskStatus(todoListId, el.id, e.currentTarget.checked)}
-                    /> */}
                     <EditTableSpan oldTitle={el.title} isDone={el.isDone} callBack={updateTaskHandler}/>
                     <IconButton aria-label="delete" onClick={() => deleteTasks(todoListId, el.id)}>
                         <DeleteIcon className='delete-todolist'/>
@@ -94,6 +89,7 @@ export const TodoList = ({
 
     const addTaskHandler = (title: string) => {
         addTask(todoListId, title)
+        changeTasks(todoListId, 'all')
     }
 
     const updateTodolistHandler = (title: string) => {
@@ -101,16 +97,16 @@ export const TodoList = ({
     }
 
     return (
-        <div>
-            <div className="todoList">
+        <div className="todoList">
+            <div>
                     <h3>
                         <EditTableSpan oldTitle={title} callBack={updateTodolistHandler}/> 
                         <IconButton aria-label="delete" onClick={deleteTodolistsHandler}>
                             <DeleteIcon className='delete-todolist'/>
                         </IconButton>
                     </h3>
-                        <AddItemForm callBack={addTaskHandler}/>
-                    {tasksList}
+                        <AddItemForm filter={filter} callBack={addTaskHandler}/>
+                        {tasksList}
                 <div>
                 <Button 
                     variant={filter === 'all' ? 'contained' : 'outlined'} 

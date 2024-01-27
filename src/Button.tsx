@@ -1,6 +1,3 @@
-import React from "react";
-
-
 export type ButtonPropsType = {
     title: string
     onClickHandler: () => void

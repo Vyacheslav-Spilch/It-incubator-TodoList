@@ -3,9 +3,11 @@ import './App.css';
 import Button from '@mui/material/Button';
 import { stylesButton } from "./components/Styled";
 import TextField from '@mui/material/TextField';
+import { filterValuesType } from "./App";
 
 type AddItemFormProps = {
     callBack: (title: string) => void
+    filter?: filterValuesType
 }
 
 export const AddItemForm = (props: AddItemFormProps) => {
@@ -44,7 +46,7 @@ export const AddItemForm = (props: AddItemFormProps) => {
                     size="small"
                     id="outlined-basic" 
                     value={taskTitle}
-                    label={error ? error : taskTitle ? `Add task ${taskTitle}` : 'Add task...'}
+                    label={error ? error : 'Add task...'}
                     variant="outlined"
                     onChange={onChangeHandler}
                     onKeyDown={onKeyDownHandler}

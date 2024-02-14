@@ -55,11 +55,3 @@ export const EditTableSpan = (props: EditTableSpanProps) => {
     )
 }
 
-{/* <input 
-        value={newTitle} 
-        type="text" 
-        className="input"
-        onBlur={editHandler}
-        onKeyDown={onKeyDownHandler}
-        autoFocus
-        onChange={changeEditHAndler}/>  */}

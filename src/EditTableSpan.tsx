@@ -5,13 +5,12 @@ import TextField from '@mui/material/TextField';
 
 type EditTableSpanProps = {
     oldTitle: string
-    isDone?: boolean
     callBack: (title: string) => void
 }
 
 
 
-export const EditTableSpan = (props: EditTableSpanProps) => {
+export const EditTableSpan = React.memo((props: EditTableSpanProps) => {        
     const [edit, setEdit] = useState<boolean>(false)
     const [newTitle, setnewTitle] = useState(props.oldTitle)
 
@@ -41,7 +40,7 @@ export const EditTableSpan = (props: EditTableSpanProps) => {
         ? <TextField 
         size="small"
         id="standard-basic" 
-        label="Standard" 
+        label="Внести изменения" 
         variant="standard" 
         value={newTitle} 
         type="text" 
@@ -51,7 +50,7 @@ export const EditTableSpan = (props: EditTableSpanProps) => {
         autoFocus
         onChange={changeEditHAndler}
         />
-        : <span onDoubleClick={editHandler} className={props.isDone ? "task-done" : "task-active"}>{props.oldTitle}</span>
+        : <span onDoubleClick={editHandler}>{props.oldTitle}</span>
     )
-}
+})
 

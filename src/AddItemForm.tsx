@@ -1,17 +1,16 @@
 import React, {KeyboardEvent, ChangeEvent, useState } from "react";
-import './App.css';
+import './App.css'
 import Button from '@mui/material/Button';
 import { stylesButton } from "./components/Styled";
 import TextField from '@mui/material/TextField';
 import { filterValuesType } from "./AppWithRedux";
 
-type AddItemFormProps = {
+export type AddItemFormProps = {
     callBack: (title: string) => void
     filter?: filterValuesType
 }
 
-export const AddItemForm = (props: AddItemFormProps) => {
-    console.log("AddItemForm is called");
+export const AddItemForm = React.memo((props: AddItemFormProps) => {
     
     const [taskTitle, setTaskTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
@@ -33,15 +32,12 @@ export const AddItemForm = (props: AddItemFormProps) => {
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(error !== null) {
+        if(error) {
             setError(null)
         }
         if(e.key === "Enter") {
             addTaskHandler()
         }
-        // else {
-        //     setError('Error - empty string')
-        // }
     }
 
 
@@ -68,4 +64,4 @@ export const AddItemForm = (props: AddItemFormProps) => {
                     </Button>
                 </div>
     )
-}
+})

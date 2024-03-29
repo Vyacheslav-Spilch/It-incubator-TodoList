@@ -11,6 +11,7 @@ import { Task } from "./Task";
 import { TaskStatuses, TaskType } from "./api/todolist-api";
 import { useAppDispatch } from "./state/store";
 import { getTasksTC } from "./state/tasks-reducer";
+import { RequestStatusType } from "./app-reducer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
@@ -24,6 +25,7 @@ type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
     filter: filterValuesType
+    entityStatus: RequestStatusType
     todoListId: string
 
     deleteTasks: (todolistID: string, id: string) => void
@@ -39,6 +41,7 @@ type TodoPropsType = {
     title, 
     tasks,
     filter,
+    entityStatus,
     todoListId,
     
     deleteTasks,
@@ -107,11 +110,19 @@ type TodoPropsType = {
             <div>
                     <h3>
                         <EditTableSpan oldTitle={title} callBack={updateTodolistHandler}/> 
-                        <IconButton aria-label="delete" onClick={deleteTodolistsHandler}>
+                        <IconButton 
+                            aria-label="delete" 
+                            onClick={deleteTodolistsHandler}
+                            disabled={entityStatus === 'loading'}
+                            sx={entityStatus === 'loading' ? {opacity: '50%'}: {opacity: '100%'}}
+                            >
                             <DeleteIcon className='delete-todolist'/>
                         </IconButton>
                     </h3>
-                        <AddItemForm filter={filter} callBack={addTaskHandler}/>
+                        <AddItemForm 
+                            filter={filter} 
+                            callBack={addTaskHandler} 
+                            disabled={entityStatus === 'loading'}/>
                         {tasksList}
                 <div>
                 <Button

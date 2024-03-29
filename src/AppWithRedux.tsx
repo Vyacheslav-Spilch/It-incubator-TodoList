@@ -14,6 +14,7 @@ import { TodoList } from './Todolist';
 import { TaskStatuses, TaskType } from './api/todolist-api';
 import LinearProgress from '@mui/material/LinearProgress';
 import { InitialStateType, RequestStatusType } from './app-reducer';
+import  CustomizedSnackBars  from './components/ErrorSnackbar/ErrorSnackbar';
 
 export type filterValuesType = 'all' | 'active' | 'completed'
 // export type TodoListsType = {
@@ -50,7 +51,6 @@ const changeTasks = useCallback((taskTodolistID: string, filterValues: filterVal
 }, [dispatch])
 
 const deleteTodolist = useCallback((todoListId: string) => {
-    // dispatch(removeTodolistAC(todoListID))
     dispatch(deleteTodolistTC(todoListId))
 }, [dispatch])
 
@@ -63,7 +63,6 @@ const updateTodolist = useCallback((todoListId: string, title: string) => {
 }, [dispatch])
 
 const addTodolist = useCallback((title: string) => {
-    // dispatch(addTodolistAC(title))
     dispatch(createTodolistTC(title))
 }, [dispatch])
 
@@ -82,6 +81,7 @@ const addTodolist = useCallback((title: string) => {
             todoListId={el.id}
             title={el.title} 
             filter={el.filter}
+            entityStatus={el.entityStatus}
             tasks={tasks[el.id]}
             deleteTasks={deleteTasks}
             deleteTodolist={deleteTodolist}
@@ -101,12 +101,13 @@ const addTodolist = useCallback((title: string) => {
 
 return (
     <div className="App">
+        <CustomizedSnackBars />
     <ButtonAppBar />
         <Container fixed>
         {status === 'loading' && <LinearProgress color="primary" />}
         <Grid container >
             <Paper elevation={3} />
-                <AddItemForm callBack={addTodolist}/>
+                <AddItemForm callBack={addTodolist} />
             <Paper />
         </Grid>
         <Grid container spacing={3}>

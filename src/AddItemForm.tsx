@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { filterValuesType } from "./AppWithRedux";
 
 export type AddItemFormProps = {
+    disabled?: boolean
     callBack: (title: string) => void
     filter?: filterValuesType
 }
@@ -53,12 +54,14 @@ export const AddItemForm = React.memo((props: AddItemFormProps) => {
                     onKeyDown={onKeyDownHandler}
                     error={!!error}
                     onBlur={() => setError(null)}
+                    disabled={props.disabled}
                     />
                     <Button 
                     onClick={addTaskHandler} 
                     variant="contained" 
                     color='info'
                     style={stylesButton}
+                    disabled={props.disabled}
                     >
                         +
                     </Button>

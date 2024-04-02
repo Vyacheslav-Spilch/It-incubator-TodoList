@@ -2,7 +2,8 @@ import { filterValuesType } from "../AppWithRedux";
 import { v1 } from "uuid";
 import { Dispatch } from "redux";
 import { todolistAPI, TodolistType } from "../api/todolist-api";
-import { RequestStatusType, setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "../app-reducer";
+import { RequestStatusType, setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "./app-reducer";
+import { handleServerNetworkError } from "../utils/error-utils";
 
 
 const initialState: Array<TodolistDomainType> = [
@@ -125,6 +126,9 @@ export const getTodolistTС = () => (dispatch: Dispatch<ActionsType>) => {
             dispatch(setTodolistAC(res.data))
             dispatch(setAppStatusAC('succeeded'))
         })
+        .catch((error) => {
+            handleServerNetworkError(dispatch, error)
+        })
 }
 
 
@@ -148,6 +152,9 @@ export const createTodolistTC = (title: string) => (dispatch: Dispatch<ActionsTy
                 }
             }
         })
+        .catch((error) => {
+            handleServerNetworkError(dispatch, error)
+        })
 }
 
 export const changeTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch<ActionsType>) => {
@@ -155,6 +162,9 @@ export const changeTodolistTC = (todolistId: string, title: string) => (dispatch
         .updateTodolist(todolistId, title)
         .then(res => {
             dispatch(changeTodolistAC(todolistId, title))
+        })
+        .catch((error) => {
+            handleServerNetworkError(dispatch, error)
         })
 }
 
@@ -172,6 +182,9 @@ export const deleteTodolistTC = (todolistId: string) => (dispatch: Dispatch<Acti
             dispatch(setTodoEntityStatusAC(todolistId, 'idle'))
             dispatch(setAppStatusAC('succeeded'))
             dispatch(setAppErrorAC(error.message))
+        })
+        .catch((error) => {
+            handleServerNetworkError(dispatch, error)
         })
 }   
 

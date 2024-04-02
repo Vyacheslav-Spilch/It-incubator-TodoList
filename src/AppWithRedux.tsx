@@ -7,13 +7,13 @@ import { ButtonAppBar } from './components/ButtonAppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { addTaskAC, changeTaskStatusAC, changeTaskStatusTC, CreateTaskTC, deleteTasksAC, DeleteTaskTC, updateTasksAC, UpdateTaskTC } from './state/tasks-reducer';
+import { addTaskAC, changeTaskStatusAC, ChangeTaskStatusTC, CreateTaskTC, deleteTasksAC, DeleteTaskTC, updateTasksAC, UpdateTaskTC } from './state/tasks-reducer';
 import { addTodolistAC, changeFilterAC, removeTodolistAC, getTodolistTС, TodolistDomainType, deleteTodolistTC, createTodolistTC, changeTodolistTC} from './state/todolist-reducer';
 import { useAppDispatch, useAppSelector } from './state/store';
 import { TodoList } from './Todolist';
 import { TaskStatuses, TaskType } from './api/todolist-api';
 import LinearProgress from '@mui/material/LinearProgress';
-import { InitialStateType, RequestStatusType } from './app-reducer';
+import { InitialStateType, RequestStatusType } from './state/app-reducer';
 import  CustomizedSnackBars  from './components/ErrorSnackbar/ErrorSnackbar';
 
 export type filterValuesType = 'all' | 'active' | 'completed'
@@ -43,7 +43,7 @@ const deleteTasks = useCallback((todolistId: string, taskId: string) => {
 }, [dispatch])
 
 const changeTaskStatus = useCallback((todolistId: string, taskId: string, status: TaskStatuses) => {
-    dispatch(changeTaskStatusTC(todolistId, taskId, status))
+    dispatch(ChangeTaskStatusTC(todolistId, taskId, status))
 }, [dispatch])
 
 const changeTasks = useCallback((taskTodolistID: string, filterValues: filterValuesType) => {

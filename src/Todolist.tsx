@@ -11,7 +11,7 @@ import { Task } from "./Task";
 import { TaskStatuses, TaskType } from "./api/todolist-api";
 import { useAppDispatch } from "./state/store";
 import { getTasksTC } from "./state/tasks-reducer";
-import { RequestStatusType } from "./app-reducer";
+import { RequestStatusType } from "./state/app-reducer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 

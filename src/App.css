@@ -11,7 +11,6 @@
 }
 
 .todoList {
-  /* border: 1px solid rgb(57, 36, 160); */
   border-radius: 5px;
   background-color: #fff;
   padding: 20px;
@@ -29,7 +28,6 @@
 }
 .container-title {
   margin: 0 auto;
-  /* margin-top: 50px; */
 }
 .todoList ul {
   list-style-type: none;
@@ -106,9 +104,6 @@
 }
 
 .input_and_btn {
-  /* display: flex;
-  align-items: center; */
-  /* margin: 30px 0 20px; */
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 40px;

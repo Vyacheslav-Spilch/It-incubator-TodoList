@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { AddItemForm } from "./AddItemForm";
-import { filterValuesType } from "./AppWithRedux";
-import { EditTableSpan } from "./EditTableSpan";
+import { AddItemForm } from "../../AddItemForm";
+import { EditTableSpan } from "../../EditTableSpan";
 import Button from '@mui/material/Button';
 // import Checkbox from '@mui/material/Checkbox';
 // import React, { ChangeEvent } from 'react';
-import { Task } from "./Task";
-import { TaskStatuses, TaskType } from "./api/todolist-api";
-import { useAppDispatch } from "./state/store";
-import { getTasksTC } from "./state/tasks-reducer";
-import { RequestStatusType } from "./state/app-reducer";
+import { Task } from "../../Task";
+import { TaskStatuses, TaskType } from "../../api/todolist-api";
+import { useAppDispatch } from "../../state/store";
+import { getTasksTC } from "../../state/tasks-reducer";
+import { RequestStatusType } from "../../state/app-reducer";
+import { FilterValuesType } from "../../state/todolist-reducer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
@@ -24,13 +24,13 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 type TodoPropsType = {
     title: string
     tasks: Array<TaskType>
-    filter: filterValuesType
+    filter: FilterValuesType
     entityStatus: RequestStatusType
     todoListId: string
 
     deleteTasks: (todolistID: string, id: string) => void
     deleteTodolist: (todoListID: string) => void
-    changeTasks: (taskTodoListID: string, filter: filterValuesType) => void
+    changeTasks: (taskTodoListID: string, filter: FilterValuesType) => void
     addTask: (todoListID: string, newTitle: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, status: TaskStatuses) => void
     updateTaskTitle: (todoListId: string,taskId: string, title: string) => void

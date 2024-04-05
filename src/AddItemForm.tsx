@@ -3,7 +3,7 @@ import './App.css'
 import Button from '@mui/material/Button';
 import { stylesButton } from "./components/Styled";
 import TextField from '@mui/material/TextField';
-import { filterValuesType } from "./AppWithRedux";
+import { filterValuesType } from "./features/TodolistList/TodolistList";
 
 export type AddItemFormProps = {
     disabled?: boolean

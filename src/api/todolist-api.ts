@@ -1,12 +1,25 @@
 import axios from 'axios'
+import { LoginType } from '../components/Login/Login'
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true
 })
 
+export const authAPI = {
+    login (data: LoginType) {
+        return instance.post<ResponseLoginType<{userId: number}>>('auth/login', {data})
+    }
+}
+
+type ResponseLoginType<T = {}> = {
+    resultCode: number
+    messages: string[]
+    data: T
+}
+
 export const todolistAPI = {
-    getTodolist() {
+    getTodolist () {
         return instance.get<TodolistType[]>('todo-lists')
     },
     createTodolist (title: string) {

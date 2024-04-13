@@ -2,12 +2,12 @@ import { title } from "process";
 import React from "react";
 import { Dispatch } from "redux";
 import { v1 } from "uuid";
-import { TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskType } from "../api/todolist-api";
-import { setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "./app-reducer";
-import { handleServerAppError, handleServerNetworkError } from "../utils/error-utils";
-import { AppRootStateType } from "./store";
-import { AddTodolistACtype, RemoveTodolistACtype, setTodolistAC, SetTodolistACType } from "./todolist-reducer";
-import { TasksStateType } from "../features/TodolistList/TodolistList";
+import { TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskType } from "../../../api/todolist-api";
+import { setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "../../../state/app-reducer";
+import { handleServerAppError, handleServerNetworkError } from "../../../utils/error-utils";
+import { AppRootStateType } from "../../../state/store";
+import { AddTodolistACtype, RemoveTodolistACtype, setTodolistAC, SetTodolistACType } from "../../TodolistList/TodolistsState/todolist-reducer";
+import { TasksStateType } from "../../TodolistList/TodolistList";
 
 const initialState: TasksStateType = {
     /*"todolistId1": [
@@ -211,7 +211,7 @@ export const setTasksAC = (todolistId: string, tasks: TaskType[]) => {
     } as const
 }
 
-enum RESULT_CODE_RESPONSE {
+export enum RESULT_CODE_RESPONSE {
     succeeded = 0,
     error = 1,
     warning = 10

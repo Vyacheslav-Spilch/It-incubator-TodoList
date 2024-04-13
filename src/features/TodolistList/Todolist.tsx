@@ -6,12 +6,12 @@ import { EditTableSpan } from "../../EditTableSpan";
 import Button from '@mui/material/Button';
 // import Checkbox from '@mui/material/Checkbox';
 // import React, { ChangeEvent } from 'react';
-import { Task } from "../../Task";
+import { Task } from "../Task/Task";
 import { TaskStatuses, TaskType } from "../../api/todolist-api";
 import { useAppDispatch } from "../../state/store";
-import { getTasksTC } from "../../state/tasks-reducer";
+import { getTasksTC } from "../Task/TaskState/tasks-reducer";
 import { RequestStatusType } from "../../state/app-reducer";
-import { FilterValuesType } from "../../state/todolist-reducer";
+import { FilterValuesType } from "./TodolistsState/todolist-reducer";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 

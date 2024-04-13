@@ -7,9 +7,13 @@ import FormGroup from '@mui/material/FormGroup'
 import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { useAppDispatch } from '../../state/store'
+import { useAppDispatch, useAppSelector } from '../../state/store'
 import { setAppStatusAC } from '../../state/app-reducer'
 import { useFormik } from 'formik'
+import { loginTC } from './auth-reducer'
+import { Navigate, Router, Routes } from 'react-router-dom'
+import { TodolistList } from '../../features/TodolistList/TodolistList'
+import { Route } from '@mui/icons-material'
 
 type ErrorsType = {
     email?: string 
@@ -24,11 +28,11 @@ export type LoginType = {
 
 export const Login = () => {
     let dispatch = useAppDispatch()
-
+    let isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn)
 
     enum ValidateDate {
         ERROR_MESSAGE = 'Requered field',
-        MIN_LENGTH_PASSWORD = 5,
+        MIN_LENGTH_PASSWORD = 4,
     }
 
     const formik = useFormik({
@@ -53,6 +57,8 @@ export const Login = () => {
             return errors
         },
         onSubmit: (values) => {
+            dispatch(loginTC(values))
+            // alert(JSON.stringify(values))
             formik.resetForm()
         },
     })
@@ -60,6 +66,10 @@ export const Login = () => {
     useEffect(() => {
         dispatch(setAppStatusAC('succeeded'))
     }, [])
+
+    if(isLoggedIn) {
+        return <Navigate to={'/'}/>
+    }
 
     return (
     <Grid container justifyContent={'center'}>

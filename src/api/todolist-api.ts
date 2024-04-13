@@ -1,22 +1,33 @@
 import axios from 'axios'
+import { number } from 'prop-types'
 import { LoginType } from '../components/Login/Login'
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+        'API-KEY': '0f66c588-35ec-426d-b601-67358e4c2e4f'
+    }
 })
 
 export const authAPI = {
+    loginMe () {
+        return instance.get<ResponseType<UserDataType>>('auth/me')
+    },
     login (data: LoginType) {
-        return instance.post<ResponseLoginType<{userId: number}>>('auth/login', {data})
+        return instance.post<ResponseType<{userId: number}>>('auth/login', data)
+    },
+    logOut() {
+        return instance.delete<ResponseType>('auth/login')
     }
 }
 
-type ResponseLoginType<T = {}> = {
-    resultCode: number
-    messages: string[]
-    data: T
+export type UserDataType = {
+    id: number
+    email: string
+    login: string
 }
+
 
 export const todolistAPI = {
     getTodolist () {

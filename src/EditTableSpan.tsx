@@ -2,17 +2,14 @@ import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import './App.css';
 import TextField from '@mui/material/TextField';
 
-
 type EditTableSpanProps = {
     oldTitle: string
     callBack: (title: string) => void
 }
 
-
-
 export const EditTableSpan = React.memo((props: EditTableSpanProps) => {        
     const [edit, setEdit] = useState<boolean>(false)
-    const [newTitle, setnewTitle] = useState(props.oldTitle)
+    const [newTitle, setNewTitle] = useState(props.oldTitle)
 
     const editHandler = () => {
         setEdit(!edit)
@@ -22,7 +19,7 @@ export const EditTableSpan = React.memo((props: EditTableSpanProps) => {
     }
 
     const changeEditHAndler = (e: ChangeEvent<HTMLInputElement>) => {
-        setnewTitle(e.currentTarget.value)
+        setNewTitle(e.currentTarget.value)
     }
 
     const addTask = () => {

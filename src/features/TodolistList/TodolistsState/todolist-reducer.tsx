@@ -1,9 +1,9 @@
 import { v1 } from "uuid";
 import { Dispatch } from "redux";
-import { todolistAPI, TodolistType } from "../api/todolist-api";
-import { RequestStatusType, setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "./app-reducer";
-import { handleServerNetworkError } from "../utils/error-utils";
-import { filterValuesType } from "../features/TodolistList/TodolistList";
+import { todolistAPI, TodolistType } from "../../../api/todolist-api";
+import { RequestStatusType, setAppErrorAC, SetAppErrorACType, setAppStatusAC, SetAppStatusACType } from "../../../state/app-reducer";
+import { handleServerNetworkError } from "../../../utils/error-utils";
+import { filterValuesType } from "../TodolistList";
 
 
 const initialState: Array<TodolistDomainType> = [

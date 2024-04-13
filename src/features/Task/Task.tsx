@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import './App.css';
-import { CheckboxUni } from "./components/CheckboxUni";
+import '../../App.css';
+import { CheckboxUni } from "../../components/CheckboxUni";
 import { IconButton } from "@mui/material";
-import { EditTableSpan } from "./EditTableSpan";
+import { EditTableSpan } from "../../EditTableSpan";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { TaskStatuses, TaskType } from "./api/todolist-api";
+import { TaskStatuses, TaskType } from "../../api/todolist-api";
 // import { TaskType } from "./Todolist";
 
 type TaskPropsType = {

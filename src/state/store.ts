@@ -1,15 +1,17 @@
-import { tasksReducer } from './tasks-reducer'
-import { todolistsReducer } from './todolist-reducer'
+import { tasksReducer } from '../features/Task/TaskState/tasks-reducer'
+import { todolistsReducer } from '../features/TodolistList/TodolistsState/todolist-reducer'
 import { AnyAction, applyMiddleware, combineReducers, legacy_createStore } from 'redux'
 import { thunk, ThunkDispatch } from 'redux-thunk'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { appReducer } from './app-reducer'
+import { authReducer } from '../components/Login/auth-reducer'
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
-const rootReducer = combineReducers({
+const rootReducer  = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
+    authReducer: authReducer
 })
 // @ts-ignore
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

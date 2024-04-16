@@ -7,11 +7,11 @@ import { appReducer } from './app-reducer'
 import { authReducer } from '../components/Login/auth-reducer'
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
-const rootReducer  = combineReducers({
+const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
     app: appReducer,
-    authReducer: authReducer
+    authReducer: authReducer,
 })
 // @ts-ignore
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
@@ -21,9 +21,8 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 export type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AnyAction>
 export const useAppDispatch = useDispatch<AppDispatchType>
 //альтернативаный способ кастомизации useDispatch и его типизации
-// export type AppDispatch = typeof store.dispatch 
+// export type AppDispatch = typeof store.dispatch
 // export const useAppDispatch: () => AppDispatch = useDispatch
-
 
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 

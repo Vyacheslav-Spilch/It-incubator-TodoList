@@ -1,4 +1,4 @@
-import { v1 } from "uuid"
+import { v1 } from 'uuid'
 // import { deleteTasksAC } from "./tasks-reducer"
 // import { addTodolistAC, changeFilterAC, changeTodolistAC, removeTodolistAC, todolistsReducer } from "./todolist-reducer"
 
@@ -41,4 +41,3 @@ import { v1 } from "uuid"
 //     expect(endTodolistState.length).toBe(1)
 //     expect(endTodolistState[0].title).toBe('What to buy')
 // })
-

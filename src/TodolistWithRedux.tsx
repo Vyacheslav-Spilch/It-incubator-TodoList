@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 // import IconButton from '@mui/material/IconButton';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import { AddItemForm } from "./AddItemForm";
@@ -15,7 +15,6 @@ import React from "react";
 // import { useCallback } from 'react';
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-
 // export type TaskType = {
 //     id: string,
 //     title: string,
@@ -30,12 +29,11 @@ import React from "react";
 
 // export const TodoListWithRedux: React.FC<TodoPropsType> = ({
 //     todoListId,
-//     title, 
+//     title,
 //     filter,
 // }) => {
 //     let tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoListId])
 //     let dispatch = useDispatch()
-
 
 //     const onClickAllHandler = () => dispatch(changeFilterAC(todoListId, 'all'))
 //     const onClickActiveHandler = () => dispatch(changeFilterAC(todoListId, 'active'))
@@ -48,7 +46,7 @@ import React from "react";
 //         tasks = tasks.filter(el => el.isDone === true)
 //     }
 
-//     const tasksList: JSX.Element = tasks.length !== 0 
+//     const tasksList: JSX.Element = tasks.length !== 0
 //     ?   <ul>
 //             {tasks.map((el: TaskType) => {
 
@@ -61,17 +59,17 @@ import React from "react";
 
 //                 return (
 //                 <li key={el.id}>
-//                     <CheckboxUni 
-//                         isDone={el.isDone} 
+//                     <CheckboxUni
+//                         isDone={el.isDone}
 //                         callBack={onChangeTaskHandler}
 //                     />
-//                     <EditTableSpan 
-//                         oldTitle={el.title} 
-//                         isDone={el.isDone} 
+//                     <EditTableSpan
+//                         oldTitle={el.title}
+//                         isDone={el.isDone}
 //                         callBack={updateTaskHandler}
 //                     />
-//                     <IconButton 
-//                         aria-label="delete" 
+//                     <IconButton
+//                         aria-label="delete"
 //                         onClick={() => dispatch(deleteTasksAC(todoListId, el.id))}
 //                     >
 //                     <DeleteIcon className='delete-todolist'/>
@@ -79,18 +77,17 @@ import React from "react";
 //                 </li>
 //             )
 //         })}
-//         </ul> 
-//     : filter === "all" 
-//     ? <span className="filter_span">Task list is empty</span> 
+//         </ul>
+//     : filter === "all"
+//     ? <span className="filter_span">Task list is empty</span>
 //     : <span className="filter_span">The list of {filter} is empty</span>
-
 
 //     const deleteTodolistsHandler = () => {
 //         dispatch(removeTodolistAC(todoListId))
 //     }
 
 //     const addTaskHandler = useCallback((title: string) => {
-//         dispatch(addTaskAC(todoListId, title))        
+//         dispatch(addTaskAC(todoListId, title))
 //         dispatch(changeFilterAC(todoListId, 'all'))
 //     }, [])
 
@@ -102,7 +99,7 @@ import React from "react";
 //         <div className="todoList">
 //             <div>
 //                     <h3>
-//                         <EditTableSpan oldTitle={title} callBack={updateTodolistHandler}/> 
+//                         <EditTableSpan oldTitle={title} callBack={updateTodolistHandler}/>
 //                         <IconButton aria-label="delete" onClick={deleteTodolistsHandler}>
 //                             <DeleteIcon className='delete-todolist'/>
 //                         </IconButton>
@@ -110,22 +107,22 @@ import React from "react";
 //                         <AddItemForm filter={filter} callBack={addTaskHandler}/>
 //                         {tasksList}
 //                 <div>
-//                 <Button 
-//                     variant={filter === 'all' ? 'contained' : 'outlined'} 
+//                 <Button
+//                     variant={filter === 'all' ? 'contained' : 'outlined'}
 //                     color='info'
 //                     onClick={onClickAllHandler}
 //                     >
 //                     All
 //                 </Button>
-//                 <Button 
-//                     variant={filter === 'active' ? 'contained' : 'outlined'} 
-//                     color='info' 
+//                 <Button
+//                     variant={filter === 'active' ? 'contained' : 'outlined'}
+//                     color='info'
 //                     onClick={onClickActiveHandler}
 //                     >
 //                     Active
 //                 </Button>
-//                 <Button 
-//                     variant={filter === 'completed' ? 'contained' : 'outlined'} 
+//                 <Button
+//                     variant={filter === 'completed' ? 'contained' : 'outlined'}
 //                     color='info'
 //                     onClick={onClickCompletedHandler}
 //                     >
@@ -135,4 +132,4 @@ import React from "react";
 //             </div>
 //         </div>
 //     )
-// } 
+// }

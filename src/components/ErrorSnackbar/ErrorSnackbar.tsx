@@ -9,24 +9,20 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 })
 
 export default function CustomizedSnackBars() {
-    const error = useAppSelector<string | null>(state => state.app.error)
+    const error = useAppSelector<string | null>((state) => state.app.error)
     const dispatch = useAppDispatch()
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-        return
+        if (reason === 'clickaway') {
+            return
+        }
+        dispatch(setAppErrorAC(null))
     }
-    dispatch(setAppErrorAC(null))
-}
     return (
-    <Snackbar open={!!error} autoHideDuration={6000} onClose={handleClose}>
-        <Alert 
-            onClose={handleClose} 
-            severity="error" 
-            sx={{ width: '100%', fontSize: '15px' }}
-        >
-        {error} 🥲
-        </Alert>
-    </Snackbar>
-)
+        <Snackbar open={!!error} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%', fontSize: '15px' }}>
+                {error} 🥲
+            </Alert>
+        </Snackbar>
+    )
 }

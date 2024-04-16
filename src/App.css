@@ -1,110 +1,110 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .App {
-  width: 100%;
-  padding: 0;
+    width: 100%;
+    padding: 0;
 }
 
 .todoList > div {
 }
 
 .todoList {
-  border-radius: 5px;
-  background-color: #fff;
-  padding: 20px;
-  font-weight: 600;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+    font-weight: 600;
 }
 .title-todolist {
-  color: #fff;
+    color: #fff;
 }
 .title {
-  font-size: 35px;
-  letter-spacing: 1.2;
-  text-align: center;
-  color: rgb(17, 106, 208);
-  text-align: center;
+    font-size: 35px;
+    letter-spacing: 1.2;
+    text-align: center;
+    color: rgb(17, 106, 208);
+    text-align: center;
 }
 .container-title {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 .todoList ul {
-  list-style-type: none;
-  line-height: 30px;
+    list-style-type: none;
+    line-height: 30px;
 }
 
 .error {
-  border: 1px solid red;
+    border: 1px solid red;
 }
 .error-message {
-  color: red
+    color: red;
 }
 .input {
-  /* border: transparent; */
-  border-radius: 10px;
-  outline: none;
-  color: #000;
-  width: 80%;
+    /* border: transparent; */
+    border-radius: 10px;
+    outline: none;
+    color: #000;
+    width: 80%;
 }
 
 .active-filter {
-  background-color: rgb(57, 36, 160);
-  color: rgb(57, 36, 160);
+    background-color: rgb(57, 36, 160);
+    color: rgb(57, 36, 160);
 }
 
 .task-done {
-  color: rgb(31, 177, 31);
+    color: rgb(31, 177, 31);
 }
 .task-active {
-  color: #000;
+    color: #000;
 }
 
 .delete-todolist {
-  left: 90%;
-  top: -20px;
-  color: grey;
-  cursor: pointer;
+    left: 90%;
+    top: -20px;
+    color: grey;
+    cursor: pointer;
 }
 .delete-todolist:hover {
-
 }
 
 .btn-add-task {
-  border-radius: 10px;
-  border: 2px solid #fff;
-  background-color: rgb(57, 36, 160);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    background-color: rgb(57, 36, 160);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
 }
 .btn-add-task:hover {
-  transform: scale(1.1);
-  transition: all 0.3s ease-in;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in;
 }
-.isActive-filter, .active-filter {
-  cursor: pointer;
-  font-size: 15px;
+.isActive-filter,
+.active-filter {
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .isActive-filter {
-  border: 1px solid rgb(57, 36, 160);
-  color: rgb(57, 36, 160);
+    border: 1px solid rgb(57, 36, 160);
+    color: rgb(57, 36, 160);
 }
 
-.filter_span{
-  font-size: 18px;
-  font-weight: bold;
-  display: inline-block;
-  margin: 10px 0 20px;
-  color:  transparent;
-  letter-spacing: 1.2px;
-  color: #000;
+.filter_span {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px 0 20px;
+    color: transparent;
+    letter-spacing: 1.2px;
+    color: #000;
 }
 
 .input_and_btn {
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }

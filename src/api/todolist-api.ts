@@ -6,20 +6,20 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
-        'API-KEY': '0f66c588-35ec-426d-b601-67358e4c2e4f'
-    }
+        'API-KEY': '0f66c588-35ec-426d-b601-67358e4c2e4f',
+    },
 })
 
 export const authAPI = {
-    loginMe () {
+    loginMe() {
         return instance.get<ResponseType<UserDataType>>('auth/me')
     },
-    login (data: LoginType) {
-        return instance.post<ResponseType<{userId: number}>>('auth/login', data)
+    login(data: LoginType) {
+        return instance.post<ResponseType<{ userId: number }>>('auth/login', data)
     },
     logOut() {
         return instance.delete<ResponseType>('auth/login')
-    }
+    },
 }
 
 export type UserDataType = {
@@ -28,35 +28,44 @@ export type UserDataType = {
     login: string
 }
 
-
 export const todolistAPI = {
-    getTodolist () {
+    getTodolist() {
         return instance.get<TodolistType[]>('todo-lists')
     },
-    createTodolist (title: string) {
-        return instance.post<ResponseType<{item: TodolistType}>>('todo-lists', {title})
+    createTodolist(title: string) {
+        return instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', { title })
     },
-    deleteTodolist (id: string) {
-        return instance.delete<ResponseType<{item: TodolistType}>>(`todo-lists/${id}`)
+    deleteTodolist(id: string) {
+        return instance.delete<ResponseType<{ item: TodolistType }>>(`todo-lists/${id}`)
     },
-    updateTodolist (id: string, title: string) {
-        return instance.put<ResponseType<{item: TodolistType}>>(`todo-lists/${id}`, {title})
+    updateTodolist(id: string, title: string) {
+        return instance.put<ResponseType<{ item: TodolistType }>>(`todo-lists/${id}`, { title })
     },
-    getTasks (todolistId: string) {
+    getTasks(todolistId: string) {
         return instance.get<getTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
-    createTask (todolistId: string, title: string) {
-        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title})
+    createTask(todolistId: string, title: string) {
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {
+            title,
+        })
     },
-    updateTask (todolistId: string, taskId: string, title: string) {
-        return instance.put<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    updateTask(todolistId: string, taskId: string, title: string) {
+        return instance.put<ResponseType<{ item: TaskType }>>(
+            `todo-lists/${todolistId}/tasks/${taskId}`,
+            { title },
+        )
     },
-    deleteTask (todolistId: string, taskId: string) {
-        return instance.delete<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<ResponseType<{ item: TaskType }>>(
+            `todo-lists/${todolistId}/tasks/${taskId}`,
+        )
     },
-    updateTaskStatus (todolistId: string, taskId: string, model: UpdateTaskType) {
-        return instance.put<ResponseType<{item: TaskType}>, UpdateTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`, {model})
-    }
+    updateTaskStatus(todolistId: string, taskId: string, model: UpdateTaskType) {
+        return instance.put<ResponseType<{ item: TaskType }>, UpdateTaskType>(
+            `todo-lists/${todolistId}/tasks/${taskId}`,
+            { model },
+        )
+    },
 }
 
 export type TodolistType = {
@@ -95,7 +104,7 @@ type getTasksResponse = {
 }
 
 export type ResponseType<T = {}> = {
-    resultCode: number 
+    resultCode: number
     messages: string[]
     data: T
 }
@@ -104,7 +113,7 @@ export enum TaskStatuses {
     New = 0,
     InProgress = 1,
     Completed = 2,
-    Draft = 3
+    Draft = 3,
 }
 
 export enum TaskPriorities {
@@ -112,7 +121,5 @@ export enum TaskPriorities {
     Middle = 1,
     Hi = 2,
     Urgently = 3,
-    Later = 4
+    Later = 4,
 }
-
-

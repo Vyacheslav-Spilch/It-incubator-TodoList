@@ -9,7 +9,7 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
     isInitialized: false,
     status: 'loading' as RequestStatusType,
-    error: null
+    error: null,
 }
 
 enum APP_REDUCER_TYPE {
@@ -19,20 +19,22 @@ enum APP_REDUCER_TYPE {
 }
 
 //reducer
-export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const appReducer = (
+    state: InitialStateType = initialState,
+    action: ActionsType,
+): InitialStateType => {
     switch (action.type) {
+        case APP_REDUCER_TYPE.statusType:
+            return { ...state, status: action.status }
 
-    case APP_REDUCER_TYPE.statusType : 
-        return { ...state, status: action.status }
+        case APP_REDUCER_TYPE.errorType:
+            return { ...state, error: action.error }
 
-    case APP_REDUCER_TYPE.errorType : 
-        return {...state, error: action.error}
-    
-    case APP_REDUCER_TYPE.isInitializedType : 
-        return {...state, isInitialized: action.isInitialized}
-    
-    default:
-        return state
+        case APP_REDUCER_TYPE.isInitializedType:
+            return { ...state, isInitialized: action.isInitialized }
+
+        default:
+            return state
     }
 }
 
@@ -40,8 +42,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 export type SetAppStatusACType = ReturnType<typeof setAppStatusAC>
 export const setAppStatusAC = (status: RequestStatusType) => {
     return {
-        type: APP_REDUCER_TYPE.statusType ,
-        status
+        type: APP_REDUCER_TYPE.statusType,
+        status,
     } as const
 }
 
@@ -49,7 +51,7 @@ export type SetAppErrorACType = ReturnType<typeof setAppErrorAC>
 export const setAppErrorAC = (error: string | null) => {
     return {
         type: APP_REDUCER_TYPE.errorType,
-        error
+        error,
     } as const
 }
 
@@ -57,11 +59,9 @@ export type SetIsInitializedACType = ReturnType<typeof setIsInitializedAC>
 export const setIsInitializedAC = (isInitialized: boolean) => {
     return {
         type: APP_REDUCER_TYPE.isInitializedType,
-        isInitialized
+        isInitialized,
     } as const
 }
 
 //type
-type ActionsType = SetAppStatusACType 
-| SetAppErrorACType 
-| SetIsInitializedACType
+type ActionsType = SetAppStatusACType | SetAppErrorACType | SetIsInitializedACType

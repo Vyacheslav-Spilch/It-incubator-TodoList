@@ -14,18 +14,13 @@ import { Login } from './components/Login/Login'
 import { useEffect } from 'react'
 import { loginMeTC } from './components/Login/auth-reducer'
 import { CircularProgress } from '@mui/material'
-import { useSelector } from 'react-redux'
 
 const AppWithRedux = () => {
-    console.log(1);
-    
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     const isInitialized = useAppSelector<boolean>((state) => state.app.isInitialized)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        console.log(2);
-        
         dispatch(loginMeTC())
     }, [])
 
@@ -46,10 +41,7 @@ const AppWithRedux = () => {
                 <Routes>
                     <Route path={'/'} element={<TodolistList />} />
                     <Route path={'/login'} element={<Login />} />
-                    <Route
-                        path={'/404'}
-                        element={<h2 style={{ alignItems: 'center' }}>PAGE NOT FOUND</h2>}
-                    />
+                    <Route path={'/404'} element={<h2 style={{ alignItems: 'center' }}>PAGE NOT FOUND</h2>} />
                     <Route path={'*'} element={<Navigate to={'/404'} />} />
                 </Routes>
             </Container>

@@ -88,14 +88,8 @@ export const TodoList = React.memo(
                 <span className="filter_span">The list of {filter} is empty</span>
             )
 
-        const onClickAllHandler = useCallback(
-            () => changeTasks(todoListId, 'all'),
-            [changeTasks, todoListId],
-        )
-        const onClickActiveHandler = useCallback(
-            () => changeTasks(todoListId, 'active'),
-            [changeTasks, todoListId],
-        )
+        const onClickAllHandler = useCallback(() => changeTasks(todoListId, 'all'), [changeTasks, todoListId])
+        const onClickActiveHandler = useCallback(() => changeTasks(todoListId, 'active'), [changeTasks, todoListId])
         const onClickCompletedHandler = useCallback(
             () => changeTasks(todoListId, 'completed'),
             [changeTasks, todoListId],
@@ -129,20 +123,12 @@ export const TodoList = React.memo(
                             aria-label="delete"
                             onClick={deleteTodolistsHandler}
                             disabled={entityStatus === 'loading'}
-                            sx={
-                                entityStatus === 'loading'
-                                    ? { opacity: '50%' }
-                                    : { opacity: '100%' }
-                            }
+                            sx={entityStatus === 'loading' ? { opacity: '50%' } : { opacity: '100%' }}
                         >
                             <DeleteIcon className="delete-todolist" />
                         </IconButton>
                     </h3>
-                    <AddItemForm
-                        filter={filter}
-                        callBack={addTaskHandler}
-                        disabled={entityStatus === 'loading'}
-                    />
+                    <AddItemForm filter={filter} callBack={addTaskHandler} disabled={entityStatus === 'loading'} />
                     {tasksList}
                     <div>
                         <Button

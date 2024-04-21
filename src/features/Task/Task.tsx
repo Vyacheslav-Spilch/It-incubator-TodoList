@@ -5,7 +5,6 @@ import { IconButton } from '@mui/material'
 import { EditTableSpan } from '../../EditTableSpan'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { TaskStatuses, TaskType } from '../../api/todolist-api'
-// import { TaskType } from "./Todolist";
 
 type TaskPropsType = {
     task: TaskType
@@ -26,11 +25,7 @@ export const Task = React.memo(
         )
         const onChangeTaskHandler = useCallback(
             (checkedValue: boolean) => {
-                changeTaskStatus(
-                    todoListId,
-                    task.id,
-                    checkedValue ? TaskStatuses.Completed : TaskStatuses.New,
-                )
+                changeTaskStatus(todoListId, task.id, checkedValue ? TaskStatuses.Completed : TaskStatuses.New)
             },
             [changeTaskStatus, todoListId, task.id],
         )

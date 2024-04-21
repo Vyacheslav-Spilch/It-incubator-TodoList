@@ -109,16 +109,8 @@ export const DeleteTask = () => {
     return (
         <div>
             <div>{JSON.stringify(state)}</div>
-            <input
-                placeholder="TodolistId"
-                value={todolistId}
-                onChange={(e) => setTodolistId(e.currentTarget.value)}
-            />
-            <input
-                placeholder="TaskId"
-                value={taskId}
-                onChange={(e) => setTaskId(e.currentTarget.value)}
-            />
+            <input placeholder="TodolistId" value={todolistId} onChange={(e) => setTodolistId(e.currentTarget.value)} />
+            <input placeholder="TaskId" value={taskId} onChange={(e) => setTaskId(e.currentTarget.value)} />
 
             <button onClick={deleteTask}>Delete task</button>
         </div>

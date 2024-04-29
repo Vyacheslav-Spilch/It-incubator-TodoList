@@ -31,7 +31,7 @@ export const Login = () => {
 
     enum ValidateDate {
         ERROR_MESSAGE = 'Requered field',
-        MIN_LENGTH_PASSWORD = 4,
+        MIN_LENGTH_PASSWORD = 5,
     }
 
     const formik = useFormik({

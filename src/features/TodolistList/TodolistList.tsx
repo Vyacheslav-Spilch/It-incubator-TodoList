@@ -7,7 +7,7 @@ import { AddItemForm } from '../../AddItemForm'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { TodoList } from './Todolist'
 import { TaskStatuses, TaskType } from '../../api/todolist-api'
-import { ChangeTaskStatusTC, CreateTaskTC, DeleteTaskTC, UpdateTaskTC } from '../Task/TaskState/tasks-reducer'
+import { tasksThunks } from '../Task/TaskState/tasks-reducer'
 import {
     changeTodolistTC,
     createTodolistTC,
@@ -31,22 +31,22 @@ export const TodolistList = () => {
     const dispatch = useAppDispatch()
 
     const addTask = useCallback(
-        (todoListID: string, newTitle: string) => {
-            dispatch(CreateTaskTC(todoListID, newTitle))
+        (todoId: string, title: string) => {
+            dispatch(tasksThunks.addTask({todoId, title}))
         },
         [dispatch],
     )
 
     const deleteTasks = useCallback(
-        (todolistId: string, taskId: string) => {
-            dispatch(DeleteTaskTC(todolistId, taskId))
+        (todoId: string, taskId: string) => {
+            dispatch(tasksThunks.deleteTask({todoId, taskId}))
         },
         [dispatch],
     )
 
     const changeTaskStatus = useCallback(
-        (todolistId: string, taskId: string, status: TaskStatuses) => {
-            dispatch(ChangeTaskStatusTC(todolistId, taskId, status))
+        (todoId: string, taskId: string, status: TaskStatuses) => {
+            dispatch(tasksThunks.updateTaskStatus({todoId, taskId, status}))
         },
         [dispatch],
     )
@@ -66,8 +66,8 @@ export const TodolistList = () => {
     )
 
     const updateTaskTitle = useCallback(
-        (todoListId: string, taskId: string, title: string) => {
-            dispatch(UpdateTaskTC(todoListId, taskId, title))
+        (todoId: string, taskId: string, title: string) => {
+            dispatch(tasksThunks.updateTaskTitle({todoId, taskId, title}))
         },
         [dispatch],
     )

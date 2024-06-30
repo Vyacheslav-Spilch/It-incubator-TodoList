@@ -15,8 +15,14 @@ type TaskPropsType = {
     changeTaskStatus: (todolistID: string, taskId: string, status: TaskStatuses) => void
 }
 
-export const Task = React.memo(
-    ({ task, todoListId, deleteTasks, updateTaskTitle, changeTaskStatus }: TaskPropsType) => {
+export const Task = React.memo((
+{   
+    task, 
+    todoListId, 
+    deleteTasks, 
+    updateTaskTitle, 
+    changeTaskStatus 
+}: TaskPropsType) => {
         const updateTaskHandler = useCallback(
             (title: string) => {
                 updateTaskTitle(todoListId, task.id, title)

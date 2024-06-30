@@ -45,21 +45,16 @@ export const todolistAPI = {
         return instance.get<getTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {
-            title,
-        })
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {title})
+    },
+    updateTaskStatus(todolistId: string, taskId: string, model: UpdateTaskType) {
+        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`,  model )
     },
     updateTask(todolistId: string, taskId: string, title: string) {
-        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, { title })
+        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, {title} )
     },
     deleteTask(todolistId: string, taskId: string) {
         return instance.delete<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`)
-    },
-    updateTaskStatus(todolistId: string, taskId: string, model: UpdateTaskType) {
-        return instance.put<ResponseType<{ item: TaskType }>, UpdateTaskType>(
-            `todo-lists/${todolistId}/tasks/${taskId}`,
-            { model },
-        )
     },
 }
 
@@ -118,3 +113,16 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4,
 }
+
+export type UpdateStatusArgsType = {
+    todoId: string 
+    taskId: string 
+    status: TaskStatuses
+}
+
+export type UpdateTitleArgsType = {
+    todoId: string,
+    taskId: string
+    title: string
+}
+

@@ -4,14 +4,12 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { AddItemForm } from '../../AddItemForm'
 import { EditTableSpan } from '../../EditTableSpan'
 import Button from '@mui/material/Button'
-// import Checkbox from '@mui/material/Checkbox';
-// import React, { ChangeEvent } from 'react';
 import { Task } from '../Task/Task'
 import { TaskStatuses, TaskType } from '../../api/todolist-api'
 import { useAppDispatch } from '../../state/store'
-import { getTasksTC } from '../Task/TaskState/tasks-reducer'
 import { RequestStatusType } from '../../state/app-reducer'
 import { FilterValuesType } from './TodolistsState/todolist-reducer'
+import { getTasks } from 'features/Task/TaskState/tasks-reducer'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 // export type TaskType = {
@@ -30,7 +28,7 @@ type TodoPropsType = {
     deleteTasks: (todolistID: string, id: string) => void
     deleteTodolist: (todoListID: string) => void
     changeTasks: (taskTodoListID: string, filter: FilterValuesType) => void
-    addTask: (todoListID: string, newTitle: string) => void
+    addTask: (todoId: string, title: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, status: TaskStatuses) => void
     updateTaskTitle: (todoListId: string, taskId: string, title: string) => void
     updateTodolist: (todoListId: string, title: string) => void
@@ -61,11 +59,16 @@ export const TodoList = React.memo(
             return tasks
         }, [tasks, filter])
 
+
         const dispatch = useAppDispatch()
+
         useEffect(() => {
-            dispatch(getTasksTC(todoListId))
+            dispatch(getTasks(todoListId))
         }, [])
 
+
+
+        
         const tasksList: JSX.Element =
             tasks.length !== 0 ? (
                 <ul>
@@ -90,10 +93,7 @@ export const TodoList = React.memo(
 
         const onClickAllHandler = useCallback(() => changeTasks(todoListId, 'all'), [changeTasks, todoListId])
         const onClickActiveHandler = useCallback(() => changeTasks(todoListId, 'active'), [changeTasks, todoListId])
-        const onClickCompletedHandler = useCallback(
-            () => changeTasks(todoListId, 'completed'),
-            [changeTasks, todoListId],
-        )
+        const onClickCompletedHandler = useCallback(() => changeTasks(todoListId, 'completed'), [changeTasks, todoListId],)
 
         const deleteTodolistsHandler = () => {
             deleteTodolist(todoListId)

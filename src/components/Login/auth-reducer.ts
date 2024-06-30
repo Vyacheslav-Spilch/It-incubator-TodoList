@@ -47,7 +47,7 @@ export const loginTC =
                 handleServerAppError(dispatch, res.data)
             }
         } catch (e) {
-            handleServerNetworkError(dispatch, e as { message: string })
+            handleServerNetworkError(e as { message: string }, dispatch)
         }
     }
 
@@ -58,7 +58,7 @@ export const loginMeTC = (): AppThunk => async (dispatch) => {
         dispatch(setIsLoggedIn({ isLoggedIn: true }))
         dispatch(appActions.setAppStatus({status: 'succeeded'}))
     } catch (e) {
-        handleServerNetworkError(dispatch, e as { message: string })
+        handleServerNetworkError(e as { message: string }, dispatch)
     } finally {
         dispatch(appActions.setIsInitialized({isInitialized: true}))
     }
@@ -75,7 +75,7 @@ export const logOutTC = (): AppThunk => async (dispatch) => {
             handleServerAppError(dispatch, res.data)
         }
     } catch (e) {
-        handleServerNetworkError(dispatch, e as { message: string })
+        handleServerNetworkError(e as { message: string }, dispatch)
     }
 }
 

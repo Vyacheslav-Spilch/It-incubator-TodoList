@@ -16,35 +16,7 @@ import { createAppAsyncThunk } from 'utils/create-app-async-thunk'
     const slice = createSlice({
     name: 'task',
     initialState: {} as TasksStateType,
-    reducers: {
-        // deleteTask: (state, action: PayloadAction<{ todoId: string, taskId: string }>) => {
-        //     const taskForTodolist = state[action.payload.todoId]
-        //     const index = taskForTodolist.findIndex(task => task.id === action.payload.taskId)
-        //     if(index !== -1) {
-        //         taskForTodolist.splice(index, 1) 
-        //     }
-        // },
-        // addTask: (state, action: PayloadAction<{task: TaskType}>) => {
-        //     const taskForTodolist  = state[action.payload.task.todoListId]
-        //     taskForTodolist.unshift(action.payload.task)
-        // },
-        //*
-        // changeTaskStatus: (state, action: PayloadAction<{todoId: string, taskId: string, status: TaskStatuses}>) => {
-        //     const taskForTodolist = state[action.payload.todoId].find(task => task.id === action.payload.taskId) 
-        //     if(taskForTodolist) {
-        //         taskForTodolist.status = action.payload.status
-        //     }
-        // },
-        // changeTaskTitle: (state, action: PayloadAction<{todoId: string, taskId: string, title: string}>) => {
-        //     const taskForTodolist = state[action.payload.todoId].find(task => task.id === action.payload.taskId) 
-        //     if(taskForTodolist) {
-        //         taskForTodolist.title = action.payload.title
-        //     }
-        // },
-        setTasks: (state, action: PayloadAction<{todoId: string, tasks: TaskType[]}>) => {
-            state[action.payload.todoId] = action.payload.tasks
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(todolistActions.addTodolist, (state, action) => {
@@ -96,7 +68,6 @@ export const getTasks = createAppAsyncThunk<{ tasks: TaskType[], todoId: string 
         try {
             const res = await todolistAPI.getTasks(todoId)
             const tasks = res.data.items
-            dispatch(tasksActions.setTasks({todoId, tasks}))
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return { tasks, todoId }
         } 

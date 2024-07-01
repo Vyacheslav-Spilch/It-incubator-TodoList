@@ -11,7 +11,6 @@ export const handleServerAppError = <T>(dispatch: AppDispatchType, data: Respons
     dispatch(appActions.setAppStatus({status: 'failed'}))
 }
 
-
 export const handleServerNetworkError = (err: unknown, dispatch: AppDispatchType) => {
     let errorMessage = 'Some error occurred'
 

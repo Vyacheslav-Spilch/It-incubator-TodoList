@@ -9,7 +9,7 @@ import { TaskStatuses, TaskType } from '../../api/todolist-api'
 import { useAppDispatch } from '../../state/store'
 import { RequestStatusType } from '../../state/app-reducer'
 import { FilterValuesType } from './TodolistsState/todolist-reducer'
-import { getTasks } from 'features/Task/TaskState/tasks-reducer'
+import { getTasks, tasksThunks } from 'features/Task/TaskState/tasks-reducer'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 // export type TaskType = {
@@ -63,7 +63,7 @@ export const TodoList = React.memo(
         const dispatch = useAppDispatch()
 
         useEffect(() => {
-            dispatch(getTasks(todoListId))
+            dispatch(tasksThunks.getTasks(todoListId))
         }, [])
 
 

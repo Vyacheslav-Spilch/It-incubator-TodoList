@@ -1,26 +1,20 @@
 import { Dispatch } from 'redux'
-import { authAPI } from '../../api/todolist-api'
+import { RESULT_CODE_RESPONSE } from 'api/todolist-api'
+import { authAPI } from 'api/auth_api'
 import {
     appActions,
-} from '../../state/app-reducer'
-import { RESULT_CODE_RESPONSE } from '../../features/Task/TaskState/tasks-reducer'
-import { handleServerAppError, handleServerNetworkError } from '../../utils/error-utils'
+} from 'state/app-reducer'
 import { LoginType } from './Login'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from 'state/store'
+import { handleServerNetworkError, handleServerAppError } from 'utils'
 
-// type InitialStateType = {
-//     isLoggedIn: boolean
-// }
 
-// const initialState: InitialStateType = {
-//     isLoggedIn: false,
-// }
 
 const slice = createSlice({
     name: 'auth',
     initialState: {
-        isLoggedIn: false,
+        isLoggedIn: false as boolean,
     },
     reducers: {
         setIsLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
@@ -79,4 +73,3 @@ export const logOutTC = (): AppThunk => async (dispatch) => {
     }
 }
 
-// types

@@ -5,10 +5,10 @@ import {
     appActions,
     RequestStatusType
 } from '../../../state/app-reducer'
-import { handleServerNetworkError } from '../../../utils/error-utils'
 import { filterValuesType } from '../TodolistList'
 import { AppThunk } from 'state/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { handleServerNetworkError } from 'utils/handleServerNetworkError'
 
 const initialState: Array<TodolistDomainType> = [
     /*{id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
@@ -123,7 +123,6 @@ export const deleteTodolistTC = (id: string): AppThunk => (dispatch) => {
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
         })
         .catch((error) => {
-            console.log(error)
             dispatch(todolistActions.setTodoEntityStatus({id, entityStatus: 'idle'}))
             dispatch(appActions.setAppStatus({status: 'failed'}))
             dispatch(appActions.setAppError({error: error.message}))
